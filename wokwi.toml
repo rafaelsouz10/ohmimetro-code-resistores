@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'build/ohmimetro-code-resistores.uf2'
+elf = 'build/ohmimetro-code-resistores.elf'
