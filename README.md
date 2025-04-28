@@ -122,13 +122,14 @@ O botão A permite alternar entre quatro margens de medição distintas, adaptan
     - Faixa 10kΩ a ~47kΩ: Resistor de referência de 47kΩ;
 
     - Faixa 47kΩ a ~100kΩ: Resistor de referência de 100kΩ;
-    
+
     - Faixa 100kΩ a ~147kΩ: Associação em série de resistores 100kΩ + 47kΩ (147kΩ).
 
 Sempre que a margem é alterada, o display OLED atualiza automaticamente para indicar a nova faixa configurada e solicita a conexão do novo resistor de referência.
 
 **Função Especial – Botão B (Modo BOOTSEL)**
 O botão B é reservado para reinicializar a placa e colocá-la diretamente em modo BOOTSEL, permitindo a regravação do firmware via conexão USB.
+
 ---
 
 ### 8. Vídeo Demonstrativo
