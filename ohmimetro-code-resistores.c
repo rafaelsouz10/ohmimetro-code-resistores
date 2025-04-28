@@ -10,8 +10,9 @@
 
 int R_conhecido = 9753; //10000 // 10k ohms
 float R_x = 0.0;           // Resistor desconhecido
-float ADC_VREF = 3.31;     // Tensão de referência do ADC
+// float ADC_VREF = 3.31;     // Tensão de referência do ADC
 int ADC_RESOLUTION = 4095; // Resolução do ADC (12 bits)
+float media = 0.0;
 
 // Valores da série E24
 float e24_series[] = {10,11,12,13,15,16,18,20,22,24,27,30,33,36,39,43,47,51,56,62,68,75,82,91};
@@ -26,7 +27,7 @@ float calcular_res_x(){
         soma += adc_read();
         sleep_ms(1);
     }
-    float media = soma / 500.0;
+    media = soma / 500.0;
 
     return (R_conhecido * media) / (ADC_RESOLUTION - media); // Calcula resistência medida
 }
@@ -73,9 +74,25 @@ int main(){
     adc_init();
     adc_gpio_init(ADC_PIN);
 
+    bool cor = true;
+    char str_adc[5]; // Buffer para armazenar a string
     while (true) {
         adc_select_input(2);  // Faz leitura média do ADC
         R_x = calcular_res_x(); // Calcula resistência medida
+
+        // Verifica se está fora da faixa aceitável
+        if (R_x < 100 || R_x > 150000) {
+            // Atualiza o conteúdo do display com animações
+            ssd1306_fill(&ssd, !cor);                                   // Limpa o display
+            ssd1306_rect(&ssd, 3, 3, 122, 60, cor, !cor);              // Desenha um retângulo
+            ssd1306_line(&ssd, 3, 37, 123, 37, cor);                  // Desenha uma linha
+            ssd1306_draw_string(&ssd, "Sem resistor", 15, 15);
+            ssd1306_draw_string(&ssd, "ADC", 13, 41);             // Desenha uma string
+            ssd1306_draw_string(&ssd, "Resisten.", 50, 41);      // Desenha uma string
+            ssd1306_line(&ssd, 44, 37, 44, 60, cor);            // Desenha uma linha vertical
+            ssd1306_send_data(&ssd); 
+            continue; // Volta para o início do while
+        }
 
         // Acha o valor comercial E24 mais próximo
         float valor_e24 = encontrar_e24(R_x);
@@ -84,19 +101,22 @@ int main(){
         int digito1 = 0, digito2 = 0, multiplicador = 0;
         calcular_faixas(valor_e24, &digito1, &digito2, &multiplicador);
 
-        // Atualiza display
-        ssd1306_fill(&ssd, false);
-
         char buffer[32];
         snprintf(buffer, sizeof(buffer), "%.0f Ohms", valor_e24);
-        ssd1306_draw_string(&ssd, buffer, 0, 0);
+        sprintf(str_adc, "%1.0f", media); // Converte a média do adc inteiro em string
 
-        ssd1306_draw_string(&ssd, "Cores:", 0, 20);
-        ssd1306_draw_string(&ssd, cores[digito1], 5, 30);
-        ssd1306_draw_string(&ssd, cores[digito2], 5, 40);
-        ssd1306_draw_string(&ssd, cores[multiplicador], 5, 50);
-
-        ssd1306_send_data(&ssd);
-        sleep_ms(700);
+        // Atualiza o conteúdo do display com animações
+        ssd1306_fill(&ssd, !cor);                                   // Limpa o display
+        ssd1306_rect(&ssd, 3, 3, 122, 60, cor, !cor);              // Desenha um retângulo
+        ssd1306_line(&ssd, 3, 37, 123, 37, cor);                  // Desenha uma linha
+        ssd1306_draw_string(&ssd, cores[digito1], 8, 6);         // Desenha uma string
+        ssd1306_draw_string(&ssd, cores[digito2], 8, 16);       // Desenha uma string
+        ssd1306_draw_string(&ssd, cores[multiplicador], 8, 26);// Desenha uma string
+        ssd1306_draw_string(&ssd, "ADC", 13, 41);             // Desenha uma string
+        ssd1306_draw_string(&ssd, "Resisten.", 50, 41);      // Desenha uma string
+        ssd1306_line(&ssd, 44, 37, 44, 60, cor);            // Desenha uma linha vertical
+        ssd1306_draw_string(&ssd, str_adc, 8, 52);         // Desenha uma string
+        ssd1306_draw_string(&ssd, buffer, 48, 52);        // Desenha uma string
+        ssd1306_send_data(&ssd);                         // Atualiza o display
     }
 }
