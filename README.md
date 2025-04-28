@@ -134,4 +134,4 @@ O botão B é reservado para reinicializar a placa e colocá-la diretamente em m
 
 ### 8. Vídeo Demonstrativo
 
-Click [AQUI](O link do vídeo irá aqui) para acessar o link do Vídeo Ensaio
+Click [AQUI](https://drive.google.com/file/d/1Vxk9zhW03FknGaKMYPfO8m6HEjMYUYIi/view?usp=sharing) para acessar o link do Vídeo Ensaio
