@@ -34,7 +34,7 @@ int main(){
         R_x = calcular_res_x(); // Calcula resistência medida
 
         // Verifica se está fora da faixa aceitável
-        if (R_x < 100 || R_x > 200000) {
+        if (R_x < 100 || R_x > 190000) {
             mostrar_sem_resistor_display(); // Mostra no display que não tem resistor conectado
             mostrar_sem_resistor();        // Limpa matriz RGB   
         } else {    
