@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include "matriz_led.h"
 
-// Definição de cor RGB
+// Definição da estrutura que agrupa três componentes de cor (R, G, B)
 typedef struct {
     uint8_t r, g, b;
 } CorRGB;
@@ -13,14 +13,14 @@ typedef struct {
 static const CorRGB cores_rgb[] = {
     {0, 0, 0},       // Preto
     {90, 20, 0},    // Marrom
-    {255, 0, 0},     // Vermelho
-    {255, 80, 0},   // Laranja
+    {255, 0, 0},   // Vermelho
+    {255, 80, 0},     // Laranja
     {255, 225, 0},   // Amarelo
-    {0, 255, 0},     // Verde
-    {0, 0, 255},     // Azul
-    {128, 0, 128},   // Violeta
+    {0, 255, 0},    // Verde
+    {0, 0, 255},   // Azul
+    {128, 0, 128},    // Violeta
     {128, 128, 128}, // Cinza
-    {255, 255, 255}  // Branco
+    {255, 255, 255} // Branco
 };
 
 // Função para mostrar faixas na matriz RGB
