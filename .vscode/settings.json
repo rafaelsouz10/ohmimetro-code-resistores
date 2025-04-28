@@ -39,6 +39,10 @@
     "files.associations": {
         "bootrom.h": "c",
         "ssd1306.h": "c",
-        "timer.h": "c"
+        "timer.h": "c",
+        "cal_ohmimetro.h": "c",
+        "config_btn.h": "c",
+        "display_ssd1306.h": "c",
+        "animacao_resistor.h": "c"
     }
 }
