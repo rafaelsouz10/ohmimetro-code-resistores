@@ -118,8 +118,11 @@ Ao conectar um resistor desconhecido ao sistema, a medição é realizada automa
 **2. Alternância entre Margens de Medição (ativada ao pressionar o botão A)**
 O botão A permite alternar entre quatro margens de medição distintas, adaptando o valor do resistor conhecido para melhorar a precisão da leitura:
     - Faixa 500Ω a ~10kΩ: Resistor de referência de 10kΩ;
+
     - Faixa 10kΩ a ~47kΩ: Resistor de referência de 47kΩ;
+
     - Faixa 47kΩ a ~100kΩ: Resistor de referência de 100kΩ;
+    
     - Faixa 100kΩ a ~147kΩ: Associação em série de resistores 100kΩ + 47kΩ (147kΩ).
 
 Sempre que a margem é alterada, o display OLED atualiza automaticamente para indicar a nova faixa configurada e solicita a conexão do novo resistor de referência.
