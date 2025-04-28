@@ -45,6 +45,9 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
 pico_set_program_name(ohmimetro-code-resistores "ohmimetro-code-resistores")
 pico_set_program_version(ohmimetro-code-resistores "0.1")
 
+# Generate PIO header
+pico_generate_pio_header(ohmimetro-code-resistores ${CMAKE_CURRENT_LIST_DIR}/ws2818b.pio)
+
 # Modify the below lines to enable/disable output over UART/USB
 pico_enable_stdio_uart(ohmimetro-code-resistores 0)
 pico_enable_stdio_usb(ohmimetro-code-resistores 1)
@@ -62,6 +65,8 @@ target_include_directories(ohmimetro-code-resistores PRIVATE
 target_link_libraries(ohmimetro-code-resistores 
         hardware_i2c
         hardware_adc
+        hardware_pio
+        hardware_clocks
         )
 
 pico_add_extra_outputs(ohmimetro-code-resistores)

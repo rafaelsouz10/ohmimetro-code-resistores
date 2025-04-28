@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "pico/stdlib.h"
 #include "hardware/adc.h"
 #include "inc/display_ssd1306.h"
 #include "inc/config_btn.h"
-#include <math.h>
+#include "inc/matriz_led.h"
 
 #define ADC_PIN 28 // GPIO para o voltímetro
 
@@ -67,8 +68,8 @@ int main(){
     setup_gpio_BTN();
     gpio_set_irq_enabled_with_callback(botaoB, GPIO_IRQ_EDGE_FALL, true, &gpio_irq_handler);
 
-    // Inicializa I2C e OLED
     display_init();   // Inicializa as configurações do display OLED SSD1306
+    npInit(LED_PIN); // Inicializa matriz de LEDs NeoPixel.
 
     // Inicializa ADC
     adc_init();
